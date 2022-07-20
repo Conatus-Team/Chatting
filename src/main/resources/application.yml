@@ -1,0 +1,36 @@
+
+
+spring:
+  # DATABASE
+#  h2:
+#    console:
+#      enabled: true  # H2 웹 콘솔을 사용하겠다는 의미
+#      path: /h2-console  # 콘솔 접속을 위한 URL 경로
+#  datasource:
+#    #h2 드라이버 설정
+#    driver-class-name: org.h2.Driver  
+#    # 데이터베이스 접속을 위한 경로
+#    # 설정한 경로에 해당하는 데이터베이스 파일을 만들어야 함
+#    url: jdbc:h2:./data/testdb  
+#    # 데이터베이스의 사용자명
+#    username: sa
+#    # 로컬 개발 용도로만 사용하기 때문에 패스워드 없음
+#    password:  
+    
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/chatting?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: 1234
+    
+  # JPA
+  jpa:
+#      database-platform: org.hibernate.dialect.H2Dialect
+      database-platform: org.hibernate.dialect.MySQL5Dialect
+      hibernate:
+        ddl-auto: update
+#        ddl-auto: create
+      properties:
+        hibernate:
+          show_sql: true
+          format_sql: true
