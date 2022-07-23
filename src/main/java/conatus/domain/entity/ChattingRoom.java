@@ -1,11 +1,14 @@
-package conatus.domain;
+package conatus.domain.entity;
 
 import conatus.ChattingApplication;
-import conatus.domain.ChattingJoined;
-import conatus.domain.ChattingQuitted;
-import java.util.Date;
-import java.util.List;
+
 import javax.persistence.*;
+
+import conatus.domain.event.ChattingJoined;
+import conatus.domain.event.ChattingQuitted;
+import conatus.domain.event.GroupJoined;
+import conatus.domain.event.GroupQuitted;
+import conatus.domain.repository.ChattingRoomRepository;
 import lombok.Data;
 
 @Entity

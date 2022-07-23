@@ -1,6 +1,6 @@
-package conatus.domain;
+package conatus.domain.event;
 
-import conatus.domain.*;
+import conatus.domain.entity.Chatting;
 import conatus.infra.AbstractEvent;
 import java.util.Date;
 import lombok.Data;

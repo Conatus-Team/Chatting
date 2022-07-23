@@ -1,4 +1,4 @@
-package conatus.domain;
+package conatus.domain.event;
 
 import conatus.domain.*;
 import conatus.infra.AbstractEvent;
@@ -7,12 +7,11 @@ import java.util.Map;
 import lombok.Data;
 
 @Data
-public class GroupJoined extends AbstractEvent {
+public class GroupQuitted extends AbstractEvent {
 
     private Long id;
     private Long groupId;
     private Long userId;
-    private String category;
     // keep
 
 }
