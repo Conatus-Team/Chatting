@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import conatus.domain.entity.ChattingRoom;
 import conatus.domain.event.GroupJoined;
 import conatus.domain.event.GroupQuitted;
-import conatus.domain.repository.ChattingRepository;
+import conatus.domain.repository.ChattingMessageRepository;
 import conatus.domain.repository.ChattingRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class PolicyHandler {
 
     @Autowired
-    ChattingRepository chattingRepository;
+    ChattingMessageRepository chattingMessageRepository;
 
     @Autowired
     ChattingRoomRepository chattingRoomRepository;

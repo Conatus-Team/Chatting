@@ -5,13 +5,13 @@ import conatus.domain.event.ChattingExited;
 import java.util.Date;
 import javax.persistence.*;
 
-import conatus.domain.repository.ChattingRepository;
+import conatus.domain.repository.ChattingMessageRepository;
 import lombok.Data;
 
 @Entity
-@Table(name = "Chatting_table")
+@Table(name = "chatting_message")
 @Data
-public class Chatting {
+public class ChattingMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,10 +34,10 @@ public class Chatting {
     @PrePersist
     public void onPrePersist() {}
 
-    public static ChattingRepository repository() {
-        ChattingRepository chattingRepository = ChattingApplication.applicationContext.getBean(
-            ChattingRepository.class
+    public static ChattingMessageRepository repository() {
+        ChattingMessageRepository chattingMessageRepository = ChattingApplication.applicationContext.getBean(
+            ChattingMessageRepository.class
         );
-        return chattingRepository;
+        return chattingMessageRepository;
     }
 }

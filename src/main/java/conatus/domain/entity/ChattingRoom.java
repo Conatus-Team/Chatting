@@ -11,8 +11,10 @@ import conatus.domain.event.GroupQuitted;
 import conatus.domain.repository.ChattingRoomRepository;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "ChattingRoom_table")
+@Table(name = "chatting_room")
 @Data
 public class ChattingRoom {
 
@@ -23,6 +25,13 @@ public class ChattingRoom {
     private Long userId;
 
     private Long groupId;
+
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime createdTime = LocalDateTime.now();
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime updatedTime = LocalDateTime.now();
+    @Column(nullable = false, columnDefinition="BOOLEAN DEFAULT false")
+    private Boolean isDeleted = Boolean.FALSE;
 
     @PostPersist
     public void onPostPersist() {
@@ -57,6 +66,9 @@ public class ChattingRoom {
 
          });
         */
+
+        ChattingRoom chattingRoom = new ChattingRoom();
+        repository().save(chattingRoom);
 
     }
 

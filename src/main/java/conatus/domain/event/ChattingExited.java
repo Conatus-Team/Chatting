@@ -1,6 +1,6 @@
 package conatus.domain.event;
 
-import conatus.domain.entity.Chatting;
+import conatus.domain.entity.ChattingMessage;
 import conatus.infra.AbstractEvent;
 import java.util.Date;
 import lombok.Data;
@@ -14,7 +14,7 @@ public class ChattingExited extends AbstractEvent {
     private Date exitTime;
     private Long userId;
 
-    public ChattingExited(Chatting aggregate) {
+    public ChattingExited(ChattingMessage aggregate) {
         super(aggregate);
     }
 
