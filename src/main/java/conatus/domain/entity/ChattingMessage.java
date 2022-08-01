@@ -7,11 +7,13 @@ import javax.persistence.*;
 
 import conatus.domain.repository.ChattingMessageRepository;
 import lombok.Data;
+import lombok.Getter;
 
 @Entity
 @Table(name = "chatting_message")
 @Data
-public class ChattingMessage {
+@Getter
+public class ChattingMessage extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
