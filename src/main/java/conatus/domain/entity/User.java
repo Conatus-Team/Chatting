@@ -19,7 +19,7 @@ public class User extends BaseTimeEntity{
     private Long userId;
 
     @Column(nullable = false)
-    private String userName;
+    private String userNickname;
 
 
 
