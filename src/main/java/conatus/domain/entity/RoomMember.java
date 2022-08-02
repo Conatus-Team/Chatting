@@ -7,13 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @Entity
+@AllArgsConstructor
 public class RoomMember extends BaseTimeEntity{
 
-    @Id
+
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //MySQL의 AUTO_INCREMENT를 사용
     private Long id;
     
@@ -25,4 +29,8 @@ public class RoomMember extends BaseTimeEntity{
     @JoinColumn(name = "chatting_room_id")
     private ChattingRoom chattingRoom;
     
+    public RoomMember(User user, ChattingRoom chattingRoom) {
+		this.user = user;
+		this.chattingRoom = chattingRoom;
+	}
 }
