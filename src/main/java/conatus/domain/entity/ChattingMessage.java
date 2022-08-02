@@ -17,15 +17,15 @@ public class ChattingMessage extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long chattingId;
-
-    private Date sendDate;
+    private Long id;
 
     private Long userId;
 
     private String content;
 
-    private Long groupId;
+    @ManyToOne
+    @JoinColumn(name = "chatting_room_id")
+    private ChattingRoom chattingRoom;
 
     @PostPersist
     public void onPostPersist() {

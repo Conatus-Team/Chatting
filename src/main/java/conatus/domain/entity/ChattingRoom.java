@@ -30,9 +30,15 @@ public class ChattingRoom extends BaseTimeEntity{
     
     private String category;
 
+    private User leader;
+    
     @OneToMany(mappedBy = "chattingRoom")
     private List<RoomMember> userList;
 
+    @OneToMany(mappedBy = "chattingRoom")
+    private List<ChattingMessage> chattingMessageList;
+    
+    
     @Column(nullable = false, columnDefinition="BOOLEAN DEFAULT false")
     private Boolean isDeleted = Boolean.FALSE;
 
