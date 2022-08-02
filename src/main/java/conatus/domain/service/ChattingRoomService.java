@@ -24,43 +24,47 @@ public class ChattingRoomService {
 	private final ChattingRoomRepository chattingRoomRepository;
 	
 	
-    //채팅방 불러오기
-    public List<ChattingRoomDto> findAllRoomByUser(Long userId) {
+    //유저가 가입한 채팅방 불러오기
+    public List<ChattingRoomDto> findAllRoomByUserId(Long userId) {
+    	// 유저 찾기
     	User user = userRepository.findByUserId(userId);
+    	
+    	// 유저가 가입한 방 목록 얻기
     	List<RoomMember> roomMemberList = user.getRoomList();
     	
+    	// DTO로 바꾸기    	
     	List<ChattingRoomDto> rooms = new Vector<ChattingRoomDto>();
     	for (RoomMember roomMember : roomMemberList) {
-    		
+    		ChattingRoomDto tmp = new ChattingRoomDto(roomMember.getChattingRoom());
+    		rooms.add(tmp);
     	}
     	
-    	
-    	
-    	
-        //채팅방 최근 생성 순으로 반환
-//        List<ChattingRoom> result = new ArrayList<>(ChattingRooms.values());
-//        Collections.reverse(result);
-    	List<ChattingRoom> rooms = this.chattingRoomRepository.findAll();
-    	List<ChattingRoomDto> result = new Vector<ChattingRoomDto>();
-    	
-    	for (int i = 0; i < rooms.size(); i++) {
-    		ChattingRoomDto dto = new ChattingRoomDto();
-    		dto.setRoomUUID(rooms.get(i).getRoomUUID());
-    		result.add(dto);
-    	}
-        return result;
-    }
-
-    //채팅방 하나 불러오기
-    public ChattingRoom findById(String roomId) {
-        return ChattingRooms.get(roomId);
+        return rooms;
     }
 
     //채팅방 생성
-    public ChattingRoom createRoom( ) {
-        ChattingRoom ChattingRoom = ChattingRoom.create();
-        ChattingRoomRepository.save(ChattingRoom);
-//        ChattingRooms.put(ChattingRoom.getRoomUUID(), ChattingRoom);
-        return ChattingRoom;
+    public ChattingRoomDto createRoom(Long groupId, Long userId, String groupName, String category) {
+    	// 유저 찾기
+    	User user = userRepository.findByUserId(userId);
+    	
+    	// 채팅방 객체 생성
+        ChattingRoom chattingRoom = new ChattingRoom();
+        chattingRoom.setGroupId(groupId);
+        chattingRoom.setGroupName(groupName);
+        chattingRoom.setCategory(category);
+        chattingRoom.setLeader(user);
+        
+        // 채팅방 객체 저장
+        ChattingRoom savedChattingRoom = chattingRoomRepository.save(chattingRoom);
+        
+        // 그룹에 유저 저장하기
+        RoomMember roomMember = new RoomMember(user, savedChattingRoom);
+        roomMemberRepository.save(roomMember);
+        
+        // DTO로 만들기
+        ChattingRoomDto chattingRoomDto = new ChattingRoomDto(savedChattingRoom);
+        
+        return chattingRoomDto;
+       
     }
 }
