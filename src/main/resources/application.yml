@@ -5,11 +5,24 @@ server:
 
 spring:
   profiles: default
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/moine_chatting?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: 1234
+    
+  # JPA
   jpa:
-    properties:
+#      database-platform: org.hibernate.dialect.H2Dialect
+      database-platform: org.hibernate.dialect.MySQL5Dialect
       hibernate:
-        show_sql: true
-        format_sql: true
+        ddl-auto: update
+#        ddl-auto: create
+      properties:
+        hibernate:
+          show_sql: true
+          format_sql: true
+
   cloud:
     stream:
       kafka:
@@ -48,7 +61,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: my-kafka:9092
+          brokers: localhost:9092
         streams:
           binder:
             configuration:
