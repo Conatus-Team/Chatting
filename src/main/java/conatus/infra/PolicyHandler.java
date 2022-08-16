@@ -1,12 +1,14 @@
 package conatus.infra;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import conatus.config.kafka.KafkaProcessor;
-import conatus.domain.*;
-import javax.naming.NameParser;
-import javax.naming.NameParser;
+
 import javax.transaction.Transactional;
+
+import conatus.domain.entity.ChattingRoom;
+import conatus.domain.event.GroupJoined;
+import conatus.domain.event.GroupQuitted;
+import conatus.domain.repository.ChattingMessageRepository;
+import conatus.domain.repository.ChattingRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class PolicyHandler {
 
     @Autowired
-    ChattingRepository chattingRepository;
+    ChattingMessageRepository chattingMessageRepository;
 
     @Autowired
     ChattingRoomRepository chattingRoomRepository;
@@ -36,7 +38,7 @@ public class PolicyHandler {
         );
 
         // Sample Logic //
-        ChattingRoom.joinChatting(event);
+//        ChattingRoom.joinChatting(event);
     }
 
     @StreamListener(KafkaProcessor.INPUT)
@@ -52,7 +54,7 @@ public class PolicyHandler {
         );
 
         // Sample Logic //
-        ChattingRoom.quitChatting(event);
+//        ChattingRoom.quitChatting(event);
     }
     // keep
 

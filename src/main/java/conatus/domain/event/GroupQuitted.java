@@ -1,9 +1,6 @@
-package conatus.domain;
+package conatus.domain.event;
 
-import conatus.domain.*;
 import conatus.infra.AbstractEvent;
-import java.util.Date;
-import java.util.Map;
 import lombok.Data;
 
 @Data

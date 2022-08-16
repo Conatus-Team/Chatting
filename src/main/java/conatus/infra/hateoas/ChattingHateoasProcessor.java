@@ -1,17 +1,16 @@
-package conatus.infra;
+package conatus.infra.hateoas;
 
-import conatus.domain.*;
+import conatus.domain.entity.ChattingMessage;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.RepresentationModelProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ChattingHateoasProcessor
-    implements RepresentationModelProcessor<EntityModel<Chatting>> {
+    implements RepresentationModelProcessor<EntityModel<ChattingMessage>> {
 
     @Override
-    public EntityModel<Chatting> process(EntityModel<Chatting> model) {
+    public EntityModel<ChattingMessage> process(EntityModel<ChattingMessage> model) {
         return model;
     }
 }
