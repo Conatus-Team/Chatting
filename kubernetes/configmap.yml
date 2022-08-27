@@ -4,7 +4,7 @@ metadata:
   name: moine-backend-configmap
   namespace: moine
 data:
-  lecture_database_url: "123"
+  chatting_database_url: "123"
   database_userid: "123"
   database_password: "123"
   kafka_bootstrap_servers: "123"
