@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: chatting
   labels:
-    app: lecture
+    app: chatting
 spec:
   replicas: 1
   selector:
@@ -15,7 +15,7 @@ spec:
         app: chatting
     spec:
       containers:
-        - name: lecture
+        - name: chatting
           image: 357806352922.dkr.ecr.ap-northeast-2.amazonaws.com/moine_chatting:latest
           ports:
             - containerPort: 8080
