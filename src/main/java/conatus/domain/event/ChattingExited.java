@@ -1,5 +1,6 @@
 package conatus.domain.event;
 
+
 import conatus.domain.entity.ChattingMessage;
 import conatus.infra.AbstractEvent;
 import java.util.Date;

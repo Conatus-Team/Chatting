@@ -1,11 +1,11 @@
 package conatus.domain.entity;
 
 import conatus.ChattingApplication;
+import conatus.domain.dto.ChattingMessageDto;
 import conatus.domain.event.ChattingExited;
-import java.util.Date;
+
 import javax.persistence.*;
 
-import conatus.domain.repository.ChattingMessageRepository;
 import lombok.Data;
 import lombok.Getter;
 
@@ -21,7 +21,7 @@ public class ChattingMessage extends BaseTimeEntity{
 
     private Long userId;
 
-    private String content;
+    private String message;
 
     @ManyToOne
     @JoinColumn(name = "chatting_room_id")
@@ -29,17 +29,20 @@ public class ChattingMessage extends BaseTimeEntity{
 
     @PostPersist
     public void onPostPersist() {
-        ChattingExited chattingExited = new ChattingExited(this);
-        chattingExited.publishAfterCommit();
+//        ChattingExited chattingExited = new ChattingExited(this);
+//        chattingExited.publishAfterCommit();
     }
 
     @PrePersist
     public void onPrePersist() {}
 
-    public static ChattingMessageRepository repository() {
-        ChattingMessageRepository chattingMessageRepository = ChattingApplication.applicationContext.getBean(
-            ChattingMessageRepository.class
-        );
-        return chattingMessageRepository;
-    }
+
 }
+
+//    public static ChattingMessageRepository repository() {
+//        ChattingMessageRepository chattingMessageRepository = ChattingApplication.applicationContext.getBean(
+//                ChattingMessageRepository.class
+//        );
+//        return chattingMessageRepository;
+//    }
+//}

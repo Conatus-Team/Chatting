@@ -15,7 +15,7 @@ public class User extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //MySQL의 AUTO_INCREMENT를 사용
     private Long id;
-    
+
     private Long userId;
 
     @Column(nullable = false)
@@ -24,6 +24,6 @@ public class User extends BaseTimeEntity{
 
 
     @OneToMany(mappedBy = "user")
-    List<RoomMember> roomList; 
+    List<RoomMember> roomList;
 }
 
