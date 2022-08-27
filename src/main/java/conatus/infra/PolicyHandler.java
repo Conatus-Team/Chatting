@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class PolicyHandler {
 
     @Autowired
-    ChattingMessageRepository chattingMessageRepository;
+    ChattingMessageRepository chattingRepository;
 
     @Autowired
     ChattingRoomRepository chattingRoomRepository;
@@ -38,7 +38,7 @@ public class PolicyHandler {
         );
 
         // Sample Logic //
-//        ChattingRoom.joinChatting(event);
+        ChattingRoom.joinChatting(event);
     }
 
     @StreamListener(KafkaProcessor.INPUT)
@@ -54,7 +54,7 @@ public class PolicyHandler {
         );
 
         // Sample Logic //
-//        ChattingRoom.quitChatting(event);
+        ChattingRoom.quitChatting(event);
     }
     // keep
 
