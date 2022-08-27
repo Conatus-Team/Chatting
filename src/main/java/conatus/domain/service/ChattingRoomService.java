@@ -42,6 +42,9 @@ public class ChattingRoomService {
         return rooms;
     }
 
+
+
+
     //채팅방 생성
     public ChattingRoomDto createRoom(Long groupId, Long userId, String groupName, String category) {
     	// 유저 찾기
@@ -67,4 +70,11 @@ public class ChattingRoomService {
         return chattingRoomDto;
        
     }
+
+    // 그룹 가입시 유저를 해당 그룹의 채팅방에 넣기
+    public void joinRoom(Long userId, Long groupId) {
+
+    }
+
+
 }
