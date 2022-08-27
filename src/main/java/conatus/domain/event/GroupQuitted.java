@@ -1,6 +1,8 @@
 package conatus.domain.event;
 
+
 import conatus.infra.AbstractEvent;
+
 import lombok.Data;
 
 @Data

@@ -31,6 +31,7 @@ public class SwaggerConfig {
                 .apiInfo(swaggerInfo()).select()
                 // swagger를 적용할 패키지 지정. 해당 패키지 이하의 모든 rest api가 자동으로 swagger 문서로 생성됨
 //                .apis(RequestHandlerSelectors.basePackage("conatus"))
+                // .any(): 모든 api 문서화
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()

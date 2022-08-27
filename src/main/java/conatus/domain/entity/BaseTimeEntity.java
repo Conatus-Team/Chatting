@@ -17,26 +17,26 @@ public abstract class BaseTimeEntity {
     @Column(name = "created_time", nullable = false, updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @CreatedDate
-    private LocalDateTime createdDate;
+    private LocalDateTime createdTime;
 
 
     @Column(name = "updated_time", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @LastModifiedDate
-    private LocalDateTime updatedDate;
+    private LocalDateTime updatedTime;
 
     @PrePersist
     private void beforeSaving() {
-        this.createdDate = LocalDateTime.now();
-        this.updatedDate = LocalDateTime.now();
-        System.out.println("createdDate = " + createdDate);
+        this.createdTime = LocalDateTime.now();
+        this.updatedTime = LocalDateTime.now();
+        System.out.println("createdDate = " + createdTime);
 //        createdBy = Thread.currentThread().getName(); //todo: put your logic here
     }
 
     @PreUpdate
     private void beforeUpdating() {
-        this.updatedDate = LocalDateTime.now();
-        System.out.println("updatedDate = " + updatedDate);
+        this.updatedTime = LocalDateTime.now();
+        System.out.println("updatedDate = " + updatedTime);
 //        modifiedBy = Thread.currentThread().getName(); //todo: put your logic here
     }
 
