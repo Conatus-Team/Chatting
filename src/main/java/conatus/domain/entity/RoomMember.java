@@ -9,28 +9,30 @@ import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class RoomMember extends BaseTimeEntity{
 
 
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //MySQL의 AUTO_INCREMENT를 사용
     private Long id;
-    
+
     @ManyToOne
     @JoinColumn(name = "user_user_id")
     private User user;
-    
+
     @ManyToOne
     @JoinColumn(name = "chatting_room_id")
     private ChattingRoom chattingRoom;
-    
+
     public RoomMember(User user, ChattingRoom chattingRoom) {
-		this.user = user;
-		this.chattingRoom = chattingRoom;
-	}
+        this.user = user;
+        this.chattingRoom = chattingRoom;
+    }
 }

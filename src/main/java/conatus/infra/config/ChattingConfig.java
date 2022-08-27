@@ -3,10 +3,14 @@ package conatus.infra.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+
+// https://stackoverflow.com/questions/22925951/could-not-autowire-no-beans-of-simpmessagingtemplate-type-found
+@EnableScheduling
 @Configuration
 @EnableWebSocketMessageBroker
 public class ChattingConfig implements WebSocketMessageBrokerConfigurer {

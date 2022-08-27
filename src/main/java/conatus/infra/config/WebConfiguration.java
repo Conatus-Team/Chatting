@@ -16,6 +16,7 @@ public class WebConfiguration implements WebMvcConfigurer {
         registry.setOrder(1);
     }
 
+    // CORS 오류 해결
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
