@@ -11,8 +11,8 @@ public class GroupJoined extends AbstractEvent {
     private Long id;
     private Long groupId;
     private Long userId;
-    private String category;
-    private String groupName;
+    private String category="";
+    private String groupName="";
     // keep
 
 }

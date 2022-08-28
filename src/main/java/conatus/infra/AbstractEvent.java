@@ -3,7 +3,7 @@ package conatus.infra;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import conatus.ChattingApplication;
-import conatus.config.kafka.KafkaProcessor;
+import conatus.infra.config.KafkaProcessor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;

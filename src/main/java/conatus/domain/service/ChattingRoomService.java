@@ -42,6 +42,9 @@ public class ChattingRoomService {
         return rooms;
     }
 
+
+
+
     //채팅방 생성
     public ChattingRoomDto createRoom(Long groupId, Long userId, String groupName, String category) {
         // 유저 찾기
@@ -67,4 +70,8 @@ public class ChattingRoomService {
         return chattingRoomDto;
 
     }
+
+
+
+
 }

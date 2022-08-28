@@ -16,11 +16,20 @@ public class User extends BaseTimeEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY) //MySQL의 AUTO_INCREMENT를 사용
     private Long id;
 
+    @Column(name="is_deleted", nullable = false)
+    private boolean isDeleted = Boolean.FALSE; // 디폴트 false
+
+    @Column(name="user_id", nullable = false)
     private Long userId;
 
-    @Column(nullable = false)
+    @Column(name="user_name", nullable = false, length = 100)
+    private String userName;
+
+    @Column(name="user_nickname",nullable = true, length = 100)
     private String userNickname;
 
+    @Column(name="email",nullable = false, length = 100, unique = true)
+    private String email;
 
 
     @OneToMany(mappedBy = "user")
