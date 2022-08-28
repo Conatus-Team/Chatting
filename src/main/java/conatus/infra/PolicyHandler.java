@@ -1,19 +1,22 @@
 package conatus.infra;
 
+import conatus.domain.service.RoomMemberService;
+import lombok.RequiredArgsConstructor;
+import conatus.domain.event.SignedUp;
 import conatus.domain.service.ChattingRoomService;
-import conatus.config.kafka.KafkaProcessor;
+import conatus.infra.config.KafkaProcessor;
 
-import javax.transaction.Transactional;
 
 import conatus.domain.event.GroupJoined;
-import conatus.domain.event.GroupQuitted;
 import conatus.domain.repository.ChattingMessageRepository;
 import conatus.domain.repository.ChattingRoomRepository;
-import lombok.RequiredArgsConstructor;
+import conatus.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
+
 
 @RequiredArgsConstructor
 @Service
@@ -27,16 +30,35 @@ public class PolicyHandler {
     ChattingRoomRepository chattingRoomRepository;
 
     public final ChattingRoomService chattingRoomService;
-
+    public final UserService userService;
+    public final RoomMemberService roomMemberService;
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString) {
-        System.out.println("=========================================");
-        System.out.println("=========================================");
+
         System.out.println("eventString = " + eventString);
-        System.out.println("=========================================");
-        System.out.println("=========================================");
     }
+
+
+    // 유저 회원가입 이벤트
+    // 유저 등록
+    @StreamListener(KafkaProcessor.INPUT)
+    public void postUser(@Payload SignedUp signedUp) {
+        if (!signedUp.validate()) return;
+        System.out.println("====================================");
+        System.out.println("====================================");
+        System.out.println("SignedUp");
+        System.out.println("====================================");
+        System.out.println("====================================");
+        userService.postUser(
+                signedUp.getUserId(),
+                signedUp.getEmail(),
+                signedUp.getUserName(),
+                signedUp.getUserNickname()
+        );
+
+    }
+
 
 
     /* GroupJoined
@@ -62,42 +84,36 @@ public class PolicyHandler {
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverGroupJoined_JoinChatting(@Payload GroupJoined groupJoined) {
         if (!groupJoined.validate()){
-            System.out.println("=========================================");
-            System.out.println("=========================================");
-            System.out.println("not validate");
-            System.out.println("=========================================");
-            System.out.println("=========================================");
             return;
         }
-        GroupJoined event = groupJoined;
-
+        GroupJoined joinMember = groupJoined;
 
         System.out.println("=========================================");
         System.out.println("=========================================");
-        System.out.println(event);
+        System.out.println(joinMember);
         System.out.println("=========================================");
         System.out.println("=========================================");
 
         // Sample Logic //
-//        chattingRoomService.joinRoom(event);
+        roomMemberService.joinRoom(joinMember.getGroupId(), joinMember.getUserId());
 
     }
 
-    @StreamListener(KafkaProcessor.INPUT)
-    public void wheneverGroupQuitted_QuitChatting(
-        @Payload GroupQuitted groupQuitted
-    ) {
-        if (!groupQuitted.validate()) return;
-        GroupQuitted event = groupQuitted;
-        System.out.println(
-            "\n\n##### listener QuitChatting : " +
-            groupQuitted.toJson() +
-            "\n\n"
-        );
-
-        // Sample Logic //
-        ChattingRoom.quitChatting(event);
-    }
-    // keep
+//    @StreamListener(KafkaProcessor.INPUT)
+//    public void wheneverGroupQuitted_QuitChatting(
+//        @Payload GroupQuitted groupQuitted
+//    ) {
+//        if (!groupQuitted.validate()) return;
+//        GroupQuitted event = groupQuitted;
+//        System.out.println(
+//            "\n\n##### listener QuitChatting : " +
+//            groupQuitted.toJson() +
+//            "\n\n"
+//        );
+//
+//        // Sample Logic //
+//        ChattingRoom.quitChatting(event);
+//    }
+//    // keep
 
 }

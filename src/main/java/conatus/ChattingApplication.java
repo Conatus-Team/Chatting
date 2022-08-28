@@ -1,6 +1,6 @@
 package conatus;
 
-import conatus.config.kafka.KafkaProcessor;
+import conatus.infra.config.KafkaProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;

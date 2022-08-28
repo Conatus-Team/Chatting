@@ -1,4 +1,4 @@
-package conatus.config.kafka;
+package conatus.infra.config;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
@@ -11,6 +11,7 @@ public interface KafkaProcessor {
 
     @Input(INPUT)
     SubscribableChannel inboundTopic();
+
 
     @Output(OUTPUT)
     MessageChannel outboundTopic();

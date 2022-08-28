@@ -39,4 +39,8 @@ public class RoomMemberService {
 
         return chattingRoomDto;
     }
+
+
+
+
 }
