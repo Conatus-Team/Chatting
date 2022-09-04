@@ -3,7 +3,7 @@ package conatus.infra;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import conatus.ChattingApplication;
-import conatus.infra.config.KafkaProcessor;
+//import conatus.infra.config.KafkaProcessor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
@@ -43,25 +43,25 @@ public class AbstractEvent {
     }
 
     public void publish(String json) {
-        if (json != null) {
-            /**
-             * spring streams 방식
-             */
-            KafkaProcessor processor = ChattingApplication.applicationContext.getBean(
-                KafkaProcessor.class
-            );
-            MessageChannel outputChannel = processor.outboundTopic();
-
-            outputChannel.send(
-                MessageBuilder
-                    .withPayload(json)
-                    .setHeader(
-                        MessageHeaders.CONTENT_TYPE,
-                        MimeTypeUtils.APPLICATION_JSON
-                    )
-                    .build()
-            );
-        }
+//        if (json != null) {
+//            /**
+//             * spring streams 방식
+//             */
+//            KafkaProcessor processor = ChattingApplication.applicationContext.getBean(
+//                KafkaProcessor.class
+//            );
+//            MessageChannel outputChannel = processor.outboundTopic();
+//
+//            outputChannel.send(
+//                MessageBuilder
+//                    .withPayload(json)
+//                    .setHeader(
+//                        MessageHeaders.CONTENT_TYPE,
+//                        MimeTypeUtils.APPLICATION_JSON
+//                    )
+//                    .build()
+//            );
+//        }
     }
 
     public void publish() {
