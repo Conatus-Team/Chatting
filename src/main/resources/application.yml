@@ -1,82 +1,36 @@
 server:
-  port: 8080
+  port: 8081
 
 ---
 
 spring:
   profiles: default
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/moine_chatting?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: 1234
-    
-  # JPA
   jpa:
-#      database-platform: org.hibernate.dialect.H2Dialect
-      database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
       hibernate:
-        ddl-auto: update
-#        ddl-auto: create
-      properties:
-        hibernate:
-          show_sql: true
-          format_sql: true
-
-  cloud:
-    stream:
-      kafka:
-        binder:
-          brokers: localhost:9092
-        streams:
-          binder:
-            configuration:
-              default:
-                key:
-                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-                value:
-                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-      bindings:
-        event-in:
-          group: Chatting
-          destination: conatus
-          contentType: application/json
-        event-out:
-          destination: conatus
-          contentType: application/json
-
+        show_sql: true
+        format_sql: true
+    database: mysql
 logging:
   level:
+    org.hibernate.SQL: debug
     org.hibernate.type: trace
     org.springframework.cloud: debug
 
 
 server:
-  port: 8081
+  port: ${server_port}
 ---
 
 spring:
   profiles: docker
-  cloud:
-    stream:
-      kafka:
-        binder:
-          brokers: localhost:9092
-        streams:
-          binder:
-            configuration:
-              default:
-                key:
-                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-                value:
-                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-      bindings:
-        event-in:
-          group: Chatting
-          destination: conatus
-          contentType: application/json
-        event-out:
-          destination: conatus
-          contentType: application/json
+  datasource:
+    url: ${chatting_database_url}
+    username: ${database_userid}
+    password: ${database_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
-
+gateway:
+  url: ${gateway_url}
